@@ -38,6 +38,15 @@ contactControllers.factory('Data', function($http){
 	                return contactList[d];
 	            }
 	        }
+	    },
+	    updateContact: function(id, name, email, location, number){
+	    	console.log("going to update contact  id: ", id);
+	    	var contact = this.getContact(id);
+	    	console.log("was: " + contact.name + "now: " + name);
+	    	contact.name = name;
+	    	contact.email = email;
+	    	contact.location = location
+	    	contact.primary = number;
 	    }
 	 };
 });
@@ -61,8 +70,8 @@ contactControllers.controller('ContactListCtrl', ['$scope', 'Data',
 	}
 }]);
 
-contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'Data',
-	function($scope, $routeParams, Data){
+contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', '$location', 'Data',
+	function($scope, $routeParams, $location, Data){
 		$scope.contactID = $routeParams.contactID;
 		var contact = Data.getContact($scope.contactID);
 		console.log("Contact Found: " + contact);
@@ -71,5 +80,10 @@ contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'D
 		$scope.contactEmail = contact.email;
 		$scope.contactLocation = contact.location;
 		$scope.contactNumber = contact.primary;
+		
+		$scope.save = function() {
+			Data.updateContact($scope.contactID,$scope.contactName,$scope.contactEmail,$scope.contactLocation,$scope.contactNumber);
+			$location.path('/');
+	    };
 	}
 ]);
