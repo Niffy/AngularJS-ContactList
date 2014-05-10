@@ -31,7 +31,7 @@
 					<td>{{contact.location}}</td>
 					<td>{{contact.primary}}</td>
 					<td><a href="#/contacts/{{contact.id}}"><img src="img/user-properties.png"></a></td>
-					<td><a href="#/contacts/{{contact.name}}"><img src="img/edit-delete-2.png"></a></td>
+					<td><img ng-click="destroy(contact.id)" src="img/edit-delete-2.png"></a></td>
 					
 				</tr>
 			</tbody>

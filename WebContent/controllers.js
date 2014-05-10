@@ -79,6 +79,14 @@ contactControllers.controller('ContactListCtrl', ['$scope', 'Data',
 		});
 		$scope.orderProp = 'name';
 	}
+	
+	/**
+	 * TODO can we not move the destroy function by both controllers into another controller? so create a /delete/ route?
+	 */
+	$scope.destroy = function(id){
+    	Data.destroyContact(id);
+    };
+	
 }]);
 
 contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', '$location', 'Data',
