@@ -9,7 +9,7 @@ contactApp.config(['$routeProvider',
 				templateUrl: 'contactList.html',
 				controller: 'ContactListCtrl'
 			}).
-			when('/contacts/:contactName',{
+			when('/contacts/:contactID',{
 				templateUrl: 'contactDetail.html',
 				controller: 'ContactDetailCtrl'
 			}).

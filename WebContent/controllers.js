@@ -28,9 +28,18 @@ contactControllers.factory('Data', function($http){
 	    getData: function(){
 	    	console.log("getData");
 	    	return contactList;
+	    },
+	    getContact: function(id){
+	    	console.log("Searching for ID: " + id);
+	    	for (var d = 0, len = contactList.length; d < len; d += 1) {
+	    		console.log("current id:" + contactList[d].id);
+	            if (contactList[d].id == id) {
+	            	console.log("Found it!");
+	                return contactList[d];
+	            }
+	        }
 	    }
 	 };
-	//return contactList;
 });
 
 
@@ -50,18 +59,17 @@ contactControllers.controller('ContactListCtrl', ['$scope', 'Data',
 		});
 		$scope.orderProp = 'name';
 	}
-	
-	/*
-		$http.get('contacts.json.fix').success(function(data){
-			$scope.contacts = data;
-		});
-		
-		$scope.orderPop = 'name';
-		*/
 }]);
 
-contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams',
-	function($scope, $routeParams){
-		$scope.contactName = $routeParams.contactName;
+contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'Data',
+	function($scope, $routeParams, Data){
+		$scope.contactID = $routeParams.contactID;
+		var contact = Data.getContact($scope.contactID);
+		console.log("Contact Found: " + contact);
+		console.log(contact);
+		$scope.contactName = contact.name;
+		$scope.contactEmail = contact.email;
+		$scope.contactLocation = contact.location;
+		$scope.contactNumber = contact.primary;
 	}
 ]);
