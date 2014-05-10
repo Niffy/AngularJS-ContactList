@@ -12,8 +12,9 @@
 		</div>
 		<div class="col-md-10">
 		<table>
-			<thread>
+			
 				<tr>				
+					<th>ID</th>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Location</th>
@@ -21,15 +22,17 @@
 					<th>view</th>
 					<th>delete</th>
 				</tr>
-			</thread>
+		
 			<tbody>
 				<tr ng-repeat="contact in contacts | filter: query | orderBy:orderProp">
+					<td>{{contact.id}}</td>
 					<td>{{contact.name}}</td>
 					<td>{{contact.email}}</td>
 					<td>{{contact.location}}</td>
 					<td>{{contact.primary}}</td>
 					<td><a href="#/contacts/{{contact.name}}"><img src="img/user-properties.png"></a></td>
 					<td><a href="#/contacts/{{contact.name}}"><img src="img/edit-delete-2.png"></a></td>
+					
 				</tr>
 			</tbody>
 		</table>
