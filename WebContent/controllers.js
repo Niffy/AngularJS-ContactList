@@ -47,6 +47,17 @@ contactControllers.factory('Data', function($http){
 	    	contact.email = email;
 	    	contact.location = location;
 	    	contact.primary = number;
+	    },
+	    destroyContact: function(id){
+	    	console.log("going to destroy contact  id: ", id);
+	    	for (var d = 0, len = contactList.length; d < len; d += 1) {
+	    		console.log("current id:" + contactList[d].id);
+	            if (contactList[d].id == id) {
+	            	console.log("Found it del....!");
+	                contactList.splice(d,1);
+	                break;
+	            }
+	        }
 	    }
 	 };
 });
@@ -84,6 +95,11 @@ contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', '$
 		$scope.save = function() {
 			Data.updateContact($scope.contactID,$scope.contactName,$scope.contactEmail,$scope.contactLocation,$scope.contactNumber);
 			$location.path('/');
+	    };
+	    
+	    $scope.destroy = function(){
+	    	Data.destroyContact($scope.contactID);
+	    	$location.path('/');
 	    };
 	}
 ]);
