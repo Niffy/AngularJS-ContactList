@@ -13,6 +13,10 @@ contactApp.config(['$routeProvider',
 				templateUrl: 'contactDetail.html',
 				controller: 'ContactDetailCtrl'
 			}).
+			when('/create',{
+				templateUrl: 'contactDetail.html',
+				controller: 'ContactCreateCtrl'
+			}).
 			otherwise({
 				redirectTo: '/contacts'
 			});

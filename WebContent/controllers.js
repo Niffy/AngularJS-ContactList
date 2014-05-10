@@ -7,12 +7,14 @@ var contactControllers = angular.module('contactControllers', []);
  */
 contactControllers.factory('Data', function($http){
 	var contactList = [];
+	var nextNumber = 100;
 	/*
 	$http.get('contacts.json.fix').success(function(data){
 		contactList.content = data;
 		console.log("getting json?");
 	});
 */
+	
 	return{
 	    initData : function() {
 	    	console.log("initData");	
@@ -24,6 +26,23 @@ contactControllers.factory('Data', function($http){
 	    setData: function(data){
 	    	console.log("setData");
 	    	contactList = data;
+	    	this.findNextNumber();
+	    },
+	    findNextNumber:function(){
+	    	var newNumber = 0;
+	    	console.log("startingNumber = 0");
+	    	for (var d = 0, len = contactList.length; d < len; d += 1) {
+	    		if(contactList[d].id >= newNumber){
+	    			newNumber = contactList[d].id;
+	    			console.log("newNumber now: " + newNumber);
+	    		}
+	    	}
+	    	newNumber++;
+	    	console.log("newNumber set at: " + newNumber);
+	    	nextNumber = newNumber;
+	    },
+	    getNextIDNumber: function(){
+	    	return nextNumber++;
 	    },
 	    getData: function(){
 	    	console.log("getData");
@@ -38,6 +57,17 @@ contactControllers.factory('Data', function($http){
 	                return contactList[d];
 	            }
 	        }
+	    },
+	    createContact: function(id, name, email, location, number){
+	    	var contact = {
+	    		id: id,
+	    		name: name,
+	    		email: email,
+	    		location: location,
+	    		primary: number
+	    	};
+	    	contactList.push(contact);
+	    	
 	    },
 	    updateContact: function(id, name, email, location, number){
 	    	console.log("going to update contact  id: ", id);
@@ -77,7 +107,7 @@ contactControllers.controller('ContactListCtrl', ['$scope', 'Data',
 			$scope.contacts = data;
 			console.log($scope.contacts);	
 		});
-		$scope.orderProp = 'name';
+		$scope.orderProp = 'id';
 	}
 	
 	/**
@@ -107,6 +137,22 @@ contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', '$
 	    
 	    $scope.destroy = function(){
 	    	Data.destroyContact($scope.contactID);
+	    	$location.path('/');
+	    };
+	}
+]);
+
+contactControllers.controller('ContactCreateCtrl', ['$scope', '$routeParams', '$location', 'Data',
+	function($scope, $routeParams, $location, Data){
+		$scope.save = function() {
+			console.log("saving...");
+			$scope.contactID = Data.getNextIDNumber();
+			console.log("usign new id:" + $scope.contactID);
+			Data.createContact($scope.contactID,$scope.contactName,$scope.contactEmail,$scope.contactLocation,$scope.contactNumber);
+			$location.path('/');
+	    };
+	    
+	    $scope.destroy = function(){
 	    	$location.path('/');
 	    };
 	}

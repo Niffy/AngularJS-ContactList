@@ -1,9 +1,14 @@
 <div class="container-fluid">
+	<div>
+		
+		<p>Create new contact: <a href="#/create"><img src="img/edit-add-2.png"></a></p>
+	</div>
 	<div class="row">
 		<div class="col-md-4">
 			Search: <input ng-model="query">
 			Sort by:
 			<select ng-model="orderProp">
+			<option value="id">ID</option>
 				<option value="name">Name</option>
 				<option value="location">location</option>
 				<option value="primary">phone</option>
