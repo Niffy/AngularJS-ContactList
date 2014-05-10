@@ -13,6 +13,6 @@ contactControllers.controller('ContactListCtrl', ['$scope', '$http',
 
 contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams',
 	function($scope, $routeParams){
-		$scope.contactName = $route.contactName;
+		$scope.contactName = $routeParams.contactName;
 	}
 ]);

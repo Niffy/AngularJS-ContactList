@@ -9,8 +9,8 @@ contactApp.config(['$routeProvider',
 				templateUrl: 'contactList.html',
 				controller: 'ContactListCtrl'
 			}).
-			when('/contacts/:name',{
-				templateUrl: 'contact-detail.html',
+			when('/contacts/:contactName',{
+				templateUrl: 'contactDetail.html',
 				controller: 'ContactDetailCtrl'
 			}).
 			otherwise({
