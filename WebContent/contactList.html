@@ -1,0 +1,19 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+			Search: <input ng-model="query">
+			Sort by:
+			<select ng-model="orderProp">
+				<option value="name">Name</option>
+				<option value="location">location</option>
+			</select>
+		</div>
+		<divclass="cold-md-10>
+		<ul class="contacts">
+			<li ng-repeat="contact in contacts | filter: query | orderBy:orderProp">
+				<a href="#/contacts/{{contact.name}}">{{contact.name}}</a>
+			</li>
+		</ul>
+		</div>
+	</div>
+</div>
