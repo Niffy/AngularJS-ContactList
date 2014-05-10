@@ -45,7 +45,7 @@ contactControllers.factory('Data', function($http){
 	    	console.log("was: " + contact.name + "now: " + name);
 	    	contact.name = name;
 	    	contact.email = email;
-	    	contact.location = location
+	    	contact.location = location;
 	    	contact.primary = number;
 	    }
 	 };
