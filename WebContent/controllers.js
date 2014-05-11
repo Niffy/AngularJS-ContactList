@@ -185,6 +185,10 @@ contactControllers.controller('ContactListCtrl', ['$scope', 'Data',
 contactControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', '$location', 'Data',
 	function($scope, $routeParams, $location, Data){
 		/*
+		 * We want to show the delete button
+		 */
+		$scope.deleteShow = true;
+		/*
 		 * Get the contactID out of the url to go and retrieve the contact,
 		 * store the values in the global scope for the template to use
 		 */
