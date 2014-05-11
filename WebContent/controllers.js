@@ -99,7 +99,7 @@ contactControllers.controller('ContactListCtrl', ['$scope', 'Data',
 			$scope.contacts = data;	
 		});
 	}
-	
+	$scope.orderProp = 'id';
 	/**
 	 * TODO can we not move the destroy function by both controllers into another controller? so create a /delete/ route?
 	 */
