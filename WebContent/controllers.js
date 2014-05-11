@@ -1,19 +1,10 @@
 'use strict';
 var contactControllers = angular.module('contactControllers', []);
 
-/**
- * TODO can we initData the data on construction of factory rather then controller starting the action
- * This isn't a pretty and may fail when we clear all the data on purpose
- */
 contactControllers.factory('Data', function($http){
 	var contactList = [];
-	var nextNumber = 100;
-	/*
-	$http.get('contacts.json.fix').success(function(data){
-		contactList.content = data;
-		console.log("getting json?");
-	});
-*/
+	var nextNumber = 0;
+	var alreadyCollected = false;
 	
 	return{
 	    initData : function() {
@@ -25,8 +16,12 @@ contactControllers.factory('Data', function($http){
 	    },
 	    setData: function(data){
 	    	console.log("setData");
+	    	alreadyCollected = true;
 	    	contactList = data;
 	    	this.findNextNumber();
+	    },
+	    isCollected: function(){
+	    	return alreadyCollected;
 	    },
 	    findNextNumber:function(){
 	    	var newNumber = 0;
@@ -96,18 +91,13 @@ contactControllers.factory('Data', function($http){
 contactControllers.controller('ContactListCtrl', ['$scope', 'Data',
 	function($scope, Data){
 	$scope.contacts = [];
-	var listLength = Data.getData().length;
-	console.log("DataLegnth: " + listLength);
-	if(listLength != 0){
-		console.log("data not 0");
+	if(Data.isCollected()){
 		$scope.contacts = Data.getData();
 	}else{
 		Data.initData().success(function(data){
 			Data.setData(data);
-			$scope.contacts = data;
-			console.log($scope.contacts);	
+			$scope.contacts = data;	
 		});
-		$scope.orderProp = 'id';
 	}
 	
 	/**
