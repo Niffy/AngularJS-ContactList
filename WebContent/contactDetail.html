@@ -1,4 +1,10 @@
 <form name="contactForm">
+	<!-- 
+		We use the values stored in the global scope to populate the input boxes. 
+		ng-model indicates to bind the input to the property contactName in the global scope.
+		This means the controller can set the name on loading, but also get the name when an action
+		needs to be performed. 
+	 -->
 	<div>
 		<label>Name</label> <input type="text" name="name"
 			ng-model="contactName">
@@ -15,9 +21,10 @@
 		<label>Number</label> <input type="text" name="number"
 			ng-model="contactNumber">
 	</div>
-	
-  <a href="#/" class="btn">Cancel</a>
-  <button ng-click="save()" class="btn btn-primary">Save</button>
-  <!-- Perhaps add this in another time? currently wanting the form ot be filled in! -->
-   <button ng-click="destroy()" class="btn btn-danger">Delete</button> 
+	<!-- on cancel click set the url to blank, this will go back to the list view -->
+	<a href="#/" class="btn">Cancel</a>
+	<!-- Call the save method in the controller to perform the required action -->
+	<button ng-click="save()" class="btn btn-primary">Save</button>
+	<!-- Call the destroy method in the controller. We need to somehow remove this from view when creating a contact? ng-show? -->
+	<button ng-click="destroy()" class="btn btn-danger">Delete</button> 
 </form>

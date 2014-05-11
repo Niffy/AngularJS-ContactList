@@ -1,20 +1,28 @@
 <!DOCTYPE html>
+<!-- 
+This is the root element of the application
+I suppose we could simply add this into the body. 
+But having it here will allow thins like the page title to be changed
+ -->
 <html ng-app="contactApp">
 <head>
-<title>Contact List</title>
+<title>Contact App</title>
 <meta charset="utf-8">
+<!-- Use the bootstrap css just to help things be a bit more tidy alongside our own -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="app.css">
+<!-- Use angularJS from its own site, save time bundling in our own build -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.js"></script> 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular-route.js"> </script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular-resource.min.js">  </script>
+<!-- Include our app and controller JS files  -->
 <script src="app.js"></script>
 <script src="controllers.js"></script>
 
 </head>
 <body>
+	<!-- This is where  the view will be placed -->
 	<div ng-view></div>
 </body>
 </html>

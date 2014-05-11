@@ -1,11 +1,19 @@
 <div class="container-fluid">
+	<!-- The link to create a new contact, set the url to create and the route provider will take care of changing view and load controller  -->
 	<div>
-		
 		<p>Create new contact: <a href="#/create"><img src="img/edit-add-2.png"></a></p>
 	</div>
 	<div class="row">
 		<div class="col-md-4">
+			<!-- 
+				This is where we type in to filter the list based on an input 
+				By using ng-model we bind the input to the query property in the global scope
+			-->
 			Search: <input ng-model="query">
+			<!-- 
+				We bind the selection to the orderProp in the global scope.
+				The values have to match the json names.
+			 -->
 			Sort by:
 			<select ng-model="orderProp">
 			<option value="id">ID</option>
@@ -16,46 +24,36 @@
 			</select>
 		</div>
 		<div class="col-md-10">
-		<table>
-			
-				<tr>				
-					<th>ID</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Location</th>
-					<th>Number</th>
-					<th>view</th>
-					<th>delete</th>
-				</tr>
-		
-			<tbody>
-				<tr ng-repeat="contact in contacts | filter: query | orderBy:orderProp">
-					<td>{{contact.id}}</td>
-					<td>{{contact.name}}</td>
-					<td>{{contact.email}}</td>
-					<td>{{contact.location}}</td>
-					<td>{{contact.primary}}</td>
-					<td><a href="#/contacts/{{contact.id}}"><img src="img/user-properties.png"></a></td>
-					<td><img ng-click="destroy(contact.id)" src="img/edit-delete-2.png"></a></td>
-					
-				</tr>
-			</tbody>
-		</table>
-		
-		
-		
-		
-		
-		
-		
-		
-		<!-- 
-			<ul class="contacts">
-				<li ng-repeat="contact in contacts | filter: query | orderBy:orderProp">
-					<a href="#/contacts/{{contact.name}}">{{contact.name}}</a>
-				</li>
-			</ul>
-			-->
+			<table>
+					<tr>				
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Location</th>
+						<th>Number</th>
+						<th>View/Edit</th>
+						<th>Delete</th>
+					</tr>
+				<tbody>
+				<!--	
+					By using ng-Repeat we loop through the contacts in the global scope, its a bit like a foreach loop as the current element is called contact.
+					At the same time we tell the repeater what filters and ordering is required, as set by the properties in the global scope. 
+				 -->
+					<tr ng-repeat="contact in contacts | filter: query | orderBy:orderProp">
+					<!-- These are the properties, they have to match the JSON names -->
+						<td>{{contact.id}}</td>
+						<td>{{contact.name}}</td>
+						<td>{{contact.email}}</td>
+						<td>{{contact.location}}</td>
+						<td>{{contact.primary}}</td>
+						<!-- To view/edit the contact we include the contactId in the url and let the route provider deal with the view and controller change. -->
+						<td><a href="#/contacts/{{contact.id}}"><img src="img/user-properties.png"></a></td>
+						<!-- We call the destroy method in the list controller and pass in the contact id which is to be deleted. -->
+						<td><img ng-click="destroy(contact.id)" src="img/edit-delete-2.png"></a></td>
+						
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
